@@ -67,7 +67,7 @@ And you're done!
 ```elixir
 config :ecto_hashids,
   prefix_separator: "_",                         # What goes after the prefix?
-  characters: "023456789abcdefghjkmnpqrstvwxyz", # Which characters should be valid for hashid
+  characters: "0123456789abcdefghjkmnpqrstvwxyz", # Which characters should be valid for hashid
   salt: "fef02203-0e9c-45d4-89f2-f2ac7d154f36",  # What do you want to use for a salt for creating hashids
   prefix_descriptions: %{
     p: Purchase,                                 # Include all of your modules
