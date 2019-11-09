@@ -32,11 +32,7 @@ defmodule EctoHashids.Mixfile do
 
   defp description do
     """
-    Ecto Hashids is an ecto utility to create types for your primary_keys and handle
-    all dumping and casting to seamless interact w/ sequential IDs w/out ever exposing them to your users.
-
-    This is not intended for security; guessing a hashid is as easy as guessing a sequential id.
-    This is intended, instead, to help w/ the optics of exposing things like `/purchase/2` to your customers.
+    Ecto Hashids is an ecto utility to allow you to seamlessly interact w/ sequential IDs via Hashids
     """
   end
 
