@@ -14,7 +14,7 @@ Some solve this w/ UUIDs, meaning your users instead see `/purchase/051c022e-8b9
 
 ### What does this library do about it?
 
-EctoHashids is essentially a Ecto Type generator where you configure which schemas you want to expose hashids instead of sequential ids, and w/ 1 line in yuor schema, you can now interact w/ that model w/ the hashid instead of the sequential id.
+EctoHashids is essentially an Ecto Type generator where you configure which schemas you want to expose hashids instead of sequential ids, and w/ 1 line in your schema, you can now interact w/ that model w/ the hashid instead of the sequential id.
 
 In the above example, your user could now see: `/purchases/o_5zabk`
 
@@ -75,7 +75,24 @@ config :ecto_hashids,
   }
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/ecto_hashids](https://hexdocs.pm/ecto_hashids).
+### Final thoughts
+
+The only annoyance that can come w/ hashids is that you don't see them when looking inside the DB via a db-client of some sort. This means in your logs you'll see, oh user "u_abc123" is doing something bad. You want to quickly find out which actual user ID that is in your DB and you are a bit stuck. This library has some utility functions to help you:
+
+```elixir
+# Will dump the primary key
+EctoHashids.id!("u_abc123")
+
+# Inversely, this will encode the sequential id for you
+EctoHashids.id!({"u", 10})
+```
+
+Putting it all together:
+```elixir
+%{hashid: hashid, pkey: 10, prefix: "p"} = EctoHashids.id!({"p", 10})
+
+%Purchase{id: hashid} = Repo.get(Purchase, hashid)
+```
+
+The docs can be found at [https://hexdocs.pm/ecto_hashids](https://hexdocs.pm/ecto_hashids).
 
