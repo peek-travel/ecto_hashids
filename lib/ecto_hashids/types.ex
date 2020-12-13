@@ -31,7 +31,12 @@ defmodule EctoHashids.Types do
   Fetches the prefixed hashid module associated with the given prefix or hashid.
   """
   def fetch!(prefix_or_hashid) do
-    prefix = prefix_or_hashid |> String.split(@prefix_separator, parts: 2) |> hd()
+    prefix =
+      case @prefix_separator do
+        "" -> prefix_or_hashid |> String.slice(0..0)
+        other -> prefix_or_hashid |> String.split(other, parts: 2) |> hd()
+      end
+      
     Map.fetch!(@prefix_modules, prefix)
   end
 
