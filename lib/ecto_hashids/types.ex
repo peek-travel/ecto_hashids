@@ -4,7 +4,7 @@ defmodule EctoHashids.Types do
   # Schema names are here are for use as a human reference only; they may drift
   # due to refactoring or change to some completely different descriptive value.
   # These are just atoms, and won't raise an error if they don't actually exist.
-  @prefix_descriptions Application.get_env(:ecto_hashids, :prefix_descriptions, %{
+  @prefix_descriptions Application.compile_env(:ecto_hashids, :prefix_descriptions, %{
                          o: :ExampleModule
                        })
 
@@ -13,13 +13,13 @@ defmodule EctoHashids.Types do
                     {prefix, Module.concat(__MODULE__, Macro.camelize(prefix))}
                   end)
 
-  @prefix_separator Application.get_env(:ecto_hashids, :prefix_separator, "_")
+  @prefix_separator Application.compile_env(:ecto_hashids, :prefix_separator, "_")
 
-  @characters Application.get_env(:ecto_hashids, :characters, "0123456789abcdefghjkmnpqrstvwxyz")
+  @characters Application.compile_env(:ecto_hashids, :characters, "0123456789abcdefghjkmnpqrstvwxyz")
 
-  @salt Application.get_env(:ecto_hashids, :salt, "")
+  @salt Application.compile_env(:ecto_hashids, :salt, "")
 
-  @min_length Application.get_env(:ecto_hashids, :min_len, 5)
+  @min_length Application.compile_env(:ecto_hashids, :min_len, 5)
 
   @after_compile __MODULE__
 
